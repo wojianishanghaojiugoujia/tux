@@ -17,3 +17,11 @@ link_directories(${OpenCV_DIR}/3rdparty)
 
 add_executable(tux src/main.cpp)
 target_link_libraries(tux duktape ${OpenCV_LIBS} -static)
+
+# 复制core下的所有文件到bin下
+add_custom_command(TARGET tux PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/core )
+add_custom_command(TARGET tux PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/core ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/core)

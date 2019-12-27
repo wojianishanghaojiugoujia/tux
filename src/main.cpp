@@ -1,11 +1,16 @@
 #include <iostream>
-#include <opencv2/opencv.hpp>
-#include <duktape.h>
+#include "fs.hpp"
 using namespace std;
 
-int main(int argc, char const *argv[])
+#define APP "tux"
+#ifndef DEBUG
+#define DEBUG
+#endif
+
+int main(int argc, char *argv[])
 {
-    cout << "DUK_DEBUG_PROTOCOL_VERSION = " << DUK_DEBUG_PROTOCOL_VERSION << endl;
-    cout << "hello tux" << endl;
+    string data = file_get_contents("dat");
+    cout << data.length() << endl;
+    cout << "[" << data << "]" << endl;
     return 0;
 }
