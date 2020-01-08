@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/ago/tux/build",
+  "command": "/usr/bin/x86_64-w64-mingw32-g++-posix   -I/home/ago/tux/duktape -isystem /home/ago/opencv-build -isystem /home/ago/win7-share/opencv-4.1.2/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/core/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/flann/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/imgproc/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/ml/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/photo/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/dnn/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/features2d/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/gapi/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/imgcodecs/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/videoio/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/calib3d/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/highgui/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/objdetect/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/stitching/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/ts/include -isystem /home/ago/win7-share/opencv-4.1.2/modules/video/include  -g   -o CMakeFiles/tux.dir/src/main.cpp.o -c /home/ago/tux/src/main.cpp",
+  "file": "/home/ago/tux/src/main.cpp"
+},
+{
+  "directory": "/home/ago/tux/build/duktape",
+  "command": "/usr/bin/x86_64-w64-mingw32-gcc   -g   -o CMakeFiles/duktape.dir/duk_console.c.o   -c /home/ago/tux/duktape/duk_console.c",
+  "file": "/home/ago/tux/duktape/duk_console.c"
+},
+{
+  "directory": "/home/ago/tux/build/duktape",
+  "command": "/usr/bin/x86_64-w64-mingw32-gcc   -g   -o CMakeFiles/duktape.dir/duk_module_node.c.o   -c /home/ago/tux/duktape/duk_module_node.c",
+  "file": "/home/ago/tux/duktape/duk_module_node.c"
+},
+{
+  "directory": "/home/ago/tux/build/duktape",
+  "command": "/usr/bin/x86_64-w64-mingw32-gcc   -g   -o CMakeFiles/duktape.dir/duktape.c.o   -c /home/ago/tux/duktape/duktape.c",
+  "file": "/home/ago/tux/duktape/duktape.c"
+}
+]

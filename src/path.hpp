@@ -31,6 +31,16 @@ std::string dirname(std::string pathname)
                : pathname.substr(0, pos);
 }
 
+// 获取程序名
+std::string filename(std::string pathname)
+{
+    pathname.erase(pathname.find_last_not_of("\\/") + 1);
+    size_t pos = pathname.find_last_of("\\/");
+    return (std::string::npos == pos)
+               ? pathname
+               : pathname.substr(pos + 1);
+}
+
 // 当前工作目录
 std::string cwd()
 {

@@ -13,6 +13,30 @@ bool file_exists(const char *filename)
     return (access(filename, 0) == 0);
 }
 
+// 写内容
+bool file_put_contents(const char *filename, const char *data, std::ios_base::openmode mode)
+{
+    auto base_mode = std::ios::out;
+    std::ofstream file(filename, base_mode | mode);
+    if (!file.is_open())
+    {
+        file.close();
+        TUX_ERROR("open file(" << filename << ") err!")
+        return false;
+    }
+
+    file << data;
+    file.close();
+    return true;
+}
+
+// 写内容
+bool file_put_contents(const char *filename, const char *data)
+{
+    return file_put_contents(filename, data, std::ios::trunc);
+}
+
+// 获取文件内容
 std::basic_string<char> file_get_contents(const char *filename)
 {
     std::ifstream file(filename, std::ios::binary);
@@ -28,6 +52,7 @@ std::basic_string<char> file_get_contents(const char *filename)
     file.seekg(0, std::ios::beg);
     file.read((char *)buf, size);
     file.close();
+
     auto res = std::basic_string<char>(buf, size);
     delete[] buf;
     return res;
