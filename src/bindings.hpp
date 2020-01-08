@@ -691,6 +691,7 @@ duk_ret_t fn_mat_find(duk_context *ctx)
         {
             tpoint.point.x += rect.left;
             tpoint.point.y += rect.top;
+            tpoint.size = tplSize;
             results.push_back(tpoint);
         }
         std::vector<TplMatchResult>().swap(tresult);
@@ -709,6 +710,7 @@ duk_ret_t fn_mat_find(duk_context *ctx)
         duk_push_number(ctx, fr.score);
         duk_put_prop_string(ctx, obj_idx, "score");
         _duk_assign_point(ctx, obj_idx, fr.point);
+        _duk_assign_size(ctx, obj_idx, fr.size);
 
         duk_put_prop_index(ctx, arr_idx, nn++);
     }
@@ -765,7 +767,7 @@ duk_ret_t fn_mat_make(duk_context *ctx)
     {
         return duk_error(ctx, DUK_ERR_TYPE_ERROR, "requires at least one arguments.");
     }
-    std::string fmt = "binary";
+    std::string fmt = "base64";
     if (n > 1)
     {
         fmt = duk_safe_to_string(ctx, 1);

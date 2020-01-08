@@ -13,11 +13,14 @@ struct TplMatchResult
 {
     float score;
     POINT point;
-    TplMatchResult(float score, int x, int y)
+    SIZE size;
+    TplMatchResult(float score, int x, int y, int w = 0, int h = 0)
     {
         this->score = score;
         this->point.x = x;
         this->point.y = y;
+        this->size.cx = w;
+        this->size.cy = h;
     }
 };
 
