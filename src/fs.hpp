@@ -8,13 +8,25 @@
 #include "log.hpp"
 
 // 文件是否存在
-bool file_exists(const char *filename)
+bool file_exists(std::string filename)
 {
-    return (access(filename, 0) == 0);
+    auto fp = fopen(filename.c_str(), "r");
+    if (fp == NULL)
+    {
+        return false;
+    }
+    fclose(fp);
+    return true;
+}
+
+// 目录是否存在
+bool dir_exists(std::string pathname)
+{
+    return (access(pathname.c_str(), 0) == 0) && !file_exists(pathname);
 }
 
 // 写内容
-bool file_put_contents(const char *filename, const char *data, std::ios_base::openmode mode)
+bool file_put_contents(std::string filename, std::string data, std::ios_base::openmode mode)
 {
     auto base_mode = std::ios::out;
     std::ofstream file(filename, base_mode | mode);
@@ -31,13 +43,13 @@ bool file_put_contents(const char *filename, const char *data, std::ios_base::op
 }
 
 // 写内容
-bool file_put_contents(const char *filename, const char *data)
+bool file_put_contents(std::string filename, std::string data)
 {
     return file_put_contents(filename, data, std::ios::trunc);
 }
 
 // 获取文件内容
-std::basic_string<char> file_get_contents(const char *filename)
+std::basic_string<char> file_get_contents(std::string filename)
 {
     std::ifstream file(filename, std::ios::binary);
     if (!file.is_open())

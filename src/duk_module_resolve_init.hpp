@@ -30,6 +30,19 @@ duk_ret_t _cb_resolve_module(duk_context *ctx)
     std::string resolvedId = requested_id;
 
     resolvedId = dirname(parent_id) + DIRECTORY_SEPARATOR + resolvedId;
+    if (!file_exists(resolvedId.c_str()))
+    {
+        auto tmp = resolvedId + ".js";
+        if (!file_exists(tmp.c_str()))
+        {
+            tmp = resolvedId + DIRECTORY_SEPARATOR + "index.js";
+            if (!file_exists(tmp.c_str()))
+            {
+                return duk_error(ctx, DUK_ERR_ERROR, "resolve file not found!");
+            }
+        }
+        resolvedId = tmp;
+    }
     resolvedId = realpath(resolvedId);
 
     /* Arrive at the canonical module ID somehow. */
