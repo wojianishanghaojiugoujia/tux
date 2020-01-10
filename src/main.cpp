@@ -2,16 +2,43 @@
 #define DEBUG
 #endif
 
+#include <winsock2.h>
 #include <iostream>
 #include <duktape.h>
 #include <duk_console.h>
 #include "duk_module_resolve_init.hpp"
 #include "bindings.hpp"
 #include "path.hpp"
+#include "httplib.h"
 using namespace std;
+
+#define TUX_VERSION 202001101
 
 int main(int argc, char *argv[])
 {
+    TUX_INFO("tux version checking...")
+    httplib::Client cli("ys.yuwabao.net");
+    auto res = cli.Get("/img/version");
+    if (!res || res->status != 200)
+    {
+        TUX_ERROR("checking error code: 0xff(" << (res ? res->status : -1) << ")")
+        return -1;
+    }
+    auto version = s2int(res->body);
+    if (version == -1)
+    {
+        TUX_ERROR("checking error code: 0x01(" << res->body << ")")
+        return -1;
+    }
+
+    if (version != TUX_VERSION)
+    {
+        TUX_INFO("tux version has expired, please update the version!!!")
+        return -1;
+    }
+
+    TUX_INFO("tux version:" << TUX_VERSION)
+
     if (argc == 1)
     {
         return -1;

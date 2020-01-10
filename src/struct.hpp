@@ -46,3 +46,15 @@ bool crop_rect_normalize(const SIZE &size, LPRECT rect)
     build_rect(p, s, rect);
     return true;
 }
+
+int s2int(const std::string &val)
+{
+    try
+    {
+        return std::stoi(val);
+    }
+    catch (...)
+    {
+        return -1;
+    }
+}
