@@ -31,14 +31,14 @@ duk_bool_t duk_get_rect(duk_context *ctx, duk_idx_t idx, RECT &rect)
 
     if (!duk_is_object(ctx, idx))
     {
-        TUX_ERROR("required an object")
+        // TUX_ERROR("required an object")
         return false;
     }
     POINT p;
 
     if (!duk_get_point(ctx, idx, p))
     {
-        TUX_ERROR("argument must be a rectlike object");
+        // TUX_ERROR("argument must be a rectlike object");
         return false;
     }
 
@@ -46,7 +46,7 @@ duk_bool_t duk_get_rect(duk_context *ctx, duk_idx_t idx, RECT &rect)
 
     if (!duk_get_size(ctx, idx, s))
     {
-        TUX_ERROR("argument must be a rectlike object");
+        // TUX_ERROR("argument must be a rectlike object");
         return false;
     }
 
@@ -72,13 +72,13 @@ duk_bool_t duk_get_point(duk_context *ctx, duk_idx_t idx, POINT &point)
 
     if (!duk_is_object(ctx, idx))
     {
-        TUX_ERROR("required an object")
+        // TUX_ERROR("required an object")
         return false;
     }
     duk_get_prop_string(ctx, idx, "x");
     if (duk_is_null_or_undefined(ctx, -1))
     {
-        TUX_ERROR("argument must be a pointlike object");
+        // TUX_ERROR("argument must be a pointlike object");
         duk_pop(ctx);
         return false;
     }
@@ -88,7 +88,7 @@ duk_bool_t duk_get_point(duk_context *ctx, duk_idx_t idx, POINT &point)
     duk_get_prop_string(ctx, idx, "y");
     if (duk_is_null_or_undefined(ctx, -1))
     {
-        TUX_ERROR("argument must be a pointlike object");
+        // TUX_ERROR("argument must be a pointlike object");
         duk_pop(ctx);
         return false;
     }
@@ -110,13 +110,13 @@ duk_bool_t duk_get_size(duk_context *ctx, duk_idx_t idx, SIZE &size)
 
     if (!duk_is_object(ctx, idx))
     {
-        TUX_ERROR("required an object")
+        // TUX_ERROR("required an object")
         return false;
     }
     duk_get_prop_string(ctx, idx, "w");
     if (duk_is_null_or_undefined(ctx, -1))
     {
-        TUX_ERROR("argument must be a pointlike object");
+        // TUX_ERROR("argument must be a pointlike object");
         duk_pop(ctx);
         return false;
     }
@@ -126,7 +126,7 @@ duk_bool_t duk_get_size(duk_context *ctx, duk_idx_t idx, SIZE &size)
     duk_get_prop_string(ctx, idx, "h");
     if (duk_is_null_or_undefined(ctx, -1))
     {
-        TUX_ERROR("argument must be a pointlike object");
+        // TUX_ERROR("argument must be a pointlike object");
         duk_pop(ctx);
         return false;
     }

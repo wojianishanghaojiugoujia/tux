@@ -1,17 +1,17 @@
 /**
  * 目录分隔符
  */
-declare const __ds = ''
+declare const __ds: String = ''
 
 /**
  * 当前脚本绝对路径
  */
-declare const __filename = ''
+declare const __filename: String = ''
 
 /**
  * 当前脚本的绝对目录
  */
-declare const __dirname = ''
+declare const __dirname: String = ''
 
 /**
  * 指针对象
