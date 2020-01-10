@@ -1,4 +1,19 @@
 /**
+ * 目录分隔符
+ */
+declare const __ds = ''
+
+/**
+ * 当前脚本绝对路径
+ */
+declare const __filename = ''
+
+/**
+ * 当前脚本的绝对目录
+ */
+declare const __dirname = ''
+
+/**
  * 指针对象
  */
 declare class pointer { }
