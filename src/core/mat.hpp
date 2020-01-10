@@ -1,9 +1,12 @@
 #pragma once
 
+#include <string>
+#include <vector>
 #include <windef.h>
 #include <opencv2/opencv.hpp>
 #include "../struct.hpp"
 
+inline bool mat_save(cv::Mat *&mat, const std::string &filename, const std::vector<int> &params = std::vector<int>());
 void mat_release(cv::Mat *&mat);
 SIZE mat_size(cv::Mat *&mat);
 cv::Mat *mat_crop(cv::Mat *mat, RECT rect);
@@ -122,4 +125,9 @@ cv::Mat *gray_scale(cv::Mat *src)
         src->copyTo(*gray);
     }
     return gray;
+}
+
+inline bool mat_save(cv::Mat *&mat, const std::string &filename, const std::vector<int> &params)
+{
+    return cv::imwrite(filename, *mat, params);
 }

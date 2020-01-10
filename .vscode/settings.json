@@ -58,6 +58,8 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "numeric": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "csignal": "cpp",
+        "random": "cpp"
     }
 }

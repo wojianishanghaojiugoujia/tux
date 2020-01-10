@@ -69,6 +69,7 @@ duk_ret_t fn_mat_show(duk_context *ctx);    // mat_show(p, title = "", waitKey =
 duk_ret_t fn_mat_make(duk_context *ctx);    // mat_make(data, fmt = 'binary,base64')
 duk_ret_t fn_mat_read(duk_context *ctx);    // mat_read(path)
 duk_ret_t fn_wait_key(duk_context *ctx);    // wait_key(delay=0): key
+duk_ret_t fn_mat_save(duk_context *ctx);    // mat_save(p, filename, params = {})
 
 // 初始化绑定方法
 void tux_bindings_init(duk_context *ctx)
@@ -139,6 +140,8 @@ void tux_bindings_init(duk_context *ctx)
     duk_put_global_string(ctx, "mat_read");
     duk_push_c_function(ctx, fn_wait_key, DUK_VARARGS);
     duk_put_global_string(ctx, "wait_key");
+    duk_push_c_function(ctx, fn_mat_save, DUK_VARARGS);
+    duk_put_global_string(ctx, "mat_save");
 }
 
 // (path) path
@@ -599,7 +602,7 @@ duk_ret_t fn_mat_release(duk_context *ctx)
     }
 
     cv::Mat *pmat = (cv::Mat *)duk_get_pointer(ctx, 0);
-    TUX_DEBUG("mat-release:" << pmat)
+    // TUX_DEBUG("mat-release:" << pmat)
     if (pmat == NULL)
     {
         return duk_error(ctx, DUK_ERR_TYPE_ERROR, "first argument must be a pointer");
@@ -804,5 +807,41 @@ duk_ret_t fn_mat_read(duk_context *ctx)
     std::string bin = file_get_contents(filepath);
     cv::Mat *mat = bin2mat(bin.c_str(), bin.length());
     duk_push_pointer(ctx, (void *)mat);
+    return 1; // 返回值一个参数
+}
+
+// mat_save(p, filename, params = [])
+duk_ret_t fn_mat_save(duk_context *ctx)
+{
+    int n = duk_get_top(ctx); // 参数个数
+    if (n < 2)
+    {
+        return duk_error(ctx, DUK_ERR_TYPE_ERROR, "requires at least two arguments.");
+    }
+    auto pmat = (cv::Mat *)duk_get_pointer(ctx, 0);
+    if (pmat == NULL)
+    {
+        return duk_error(ctx, DUK_ERR_TYPE_ERROR, "first argument must be a pointer");
+    }
+
+    auto filepath = duk_get_string(ctx, 1);
+
+    std::vector<int> params;
+
+    if (n > 2 && duk_is_array(ctx, 2)) // 一个array
+    {
+        auto len = duk_get_length(ctx, 2);
+        for (auto i = 0; i < len; ++i)
+        {
+            duk_get_prop_index(ctx, 2, i);
+            if (duk_is_number(ctx, -1))
+            {
+                params.push_back(duk_to_int(ctx, -1));
+            }
+            duk_pop(ctx);
+        }
+    }
+
+    duk_push_boolean(ctx, mat_save(pmat, filepath, params));
     return 1; // 返回值一个参数
 }
