@@ -1,20 +1,43 @@
+/**
+ * 指针对象
+ */
 declare class pointer { }
+
+/**
+ * Buffer数据对象
+ */
 declare class Buffer { }
+
+/**
+ * 一个类似点的对象，只要满足有 {x,y}两个属性就可以
+ */
 declare class PointLike {
     x: Number
     y: Number
 }
+
+/**
+ * 一个类似尺寸的对象，只要满足有 {w,h}两个属性就可以
+ */
 declare class SizeLike {
     w: Number
     h: Number
 }
+
+/**
+ * 一个类似矩形的对象，只要满足有 {x,y,w,h}两个属性就可以
+ */
 declare class RectLike extends PointLike, SizeLike { }
+
+/**
+ * 图像匹配结果的对象，是一个 RectLike 对象，同时有一个score分数，是匹配的得分，0-1之间 
+ */
 declare class TplMatchResult extends RectLike {
     score: Number
 }
 
 /**
- * 获取绝对路径
+ * 获取绝对路径，根据cwd来计算
  * @param path 路径
  */
 declare function realpath(path: String): String
