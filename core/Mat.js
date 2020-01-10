@@ -1,9 +1,16 @@
 (function () {
+    var _gc_counter = 0
+    var _GC_INTEVER = 50
+
     function Mat(p) {
         this.p = p
         this.released = false
         Duktape.fin(this, function (mat) {
+            _gc_counter++
             mat.release()
+            if (_gc_counter % _GC_INTEVER == 0) {
+                Duktape.gc()
+            }
         })
     }
 
@@ -34,7 +41,6 @@
     Mat.prototype.release = function () {
         if (!this.released) {
             try {
-                console.debug("mat-release:" + this.p)
                 mat_release.apply(null, [this.p])
                 this.released = true
             } catch (e) {
