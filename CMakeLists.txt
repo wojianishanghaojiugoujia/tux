@@ -1,9 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
 project(TUX)
 
-set(CMAKE_C_COMPILER "/usr/bin/x86_64-w64-mingw32-gcc-posix")
-set(CMAKE_CXX_COMPILER "/usr/bin/x86_64-w64-mingw32-g++-posix")
-set(OpenCV_DIR /home/ago/opencv-build)
+IF(WIN32)
+    set(OpenCV_DIR D:/opencv4/mingw-static)
+ELSE()
+    set(CMAKE_C_COMPILER "/usr/bin/x86_64-w64-mingw32-gcc-posix")
+    set(CMAKE_CXX_COMPILER "/usr/bin/x86_64-w64-mingw32-g++-posix")
+    set(OpenCV_DIR /home/ago/opencv-build)
+ENDIF()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 add_subdirectory(duktape)
